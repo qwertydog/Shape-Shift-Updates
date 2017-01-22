@@ -4,6 +4,7 @@
 namespace SSPro;
 
 use Dotenv\Dotenv;
+use SSPro\Controller\ProcessCoins;
 use SSPro\Controller\ProcessShapeShift;
 
 require 'vendor/autoload.php';
@@ -20,18 +21,13 @@ if (isset($_SERVER['REQUEST_URI'])) {
 }
 
 if ($uri == '') {
-    header('location: /welcome');
+    $home = new ProcessCoins();
+    $home->get_Shape_Poloniex_Rates();
     die();
 }
 
-else if ($uri == 'welcome') {
-    $home = new ProcessShapeShift();
-    //$home->set_ShapeShifter_Rates();
-    $home->get_ShapeShifter_Rates();
-}
-
 else {
-    header('location: /welcome');
+    header('location: /');
     die();
 }
 
