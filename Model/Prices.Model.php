@@ -8,27 +8,58 @@ use PDOException;
 class Prices extends Base
 {
 
-    public function setShapeShifterRate($coin, $rate, $limit, $fee)
+    /**
+     *  Sets the Shape Shifter Rate in the Database
+     *  -- Coin must be as 'BTC_<name>
+     */
+    public function setShapeShifterRate($coin, $rateBTC, $rateALT, $limit, $fee)
     {
         date_default_timezone_set('NZ');
         $date = date("H:i:s d-m-Y");
 
-        $sql = "INSERT INTO `shapeshifter_rates` (`id`, `coin`, `rate_btc`, `limit`, `fee`, `created_at`) 
-                VALUES (NULL, '$coin', '$rate', '$limit', '$fee', '$date');";
+        $sql = "INSERT INTO `shapeshifter_rates` (`id`, `coin`, `rate_btc`, `rate_alt`, `limit`, `fee`, `created_at`) 
+                VALUES (NULL, '$coin', '$rateBTC', '$rateALT', '$limit', '$fee', '$date');
+                ";
         //var_dump($sql);die();
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $data = $stm->execute(array('$coin, $rate, $limit, $fee, $date'));
+        $data = $stm->execute(array('$coin, $rateBTC, $rateALT, $limit, $fee, $date'));
         return true;
     }
 
 
-    public function getShapeShifterRate()
+
+    /**
+     *  Sets the Poloniex Rate in the Database
+     *  -- Coin must be as 'BTC_<name>
+     */
+    public function setPoloniexRate($coin, $rateBTC, $rateALT)
     {
-        $sql = "SELECT * 
+        date_default_timezone_set('NZ');
+        $date = date("H:i:s d-m-Y");
+
+        $sql = "INSERT INTO `poloniex_rates` (`id`, `coin`, `rate_btc`, `rate_alt`, `created_at`) 
+                VALUES (NULL, '$coin', '$rateALT', '$rateBTC', '$date');";
+        //var_dump($sql);die();
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $data = $stm->execute(array('$coin, $rateALT, $rateBTC, $date'));
+        return true;
+    }
+
+
+
+    /**
+     *  Gets the Shape Shifter Rate in the Database
+     *  -- Coin must be as 'BTC_<name>
+     */
+    public function getShapeShifterRate($coin)
+    {
+        $sql = "SELECT `rate_btc`, `rate_alt`, `created_at`
                 FROM `shapeshifter_rates`  
-                ORDER BY `created_at` ASC
-                LIMIT 20
+                WHERE `coin` = '$coin'
+                ORDER BY `id` DESC 
+                LIMIT 5
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -40,47 +71,18 @@ class Prices extends Base
         return $data;
     }
 
-    public function getShapeShifterRate_ETH()
+
+    /**
+     *  Sets the Poloniex Rate in the Database
+     *  -- Coin must be as 'BTC_<name>
+     */
+    public function getPoloniexRate($coin)
     {
-        $sql = "SELECT * 
-                FROM `shapeshifter_rates`  
-                WHERE `coin` = 'BTC_ETH'
+        $sql = "SELECT `rate_btc`, `rate_alt`, `created_at`
+                FROM `poloniex_rates`  
+                WHERE `coin` = '$coin'
                 ORDER BY `id` DESC 
-                LIMIT 10
-                ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        return $data;
-    }
-    public function getShapeShifterRate_XMR()
-    {
-        $sql = "SELECT * 
-                FROM `shapeshifter_rates`  
-                WHERE `coin` = 'BTC_XMR'
-                ORDER BY `id` DESC 
-                LIMIT 10
-                ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        return $data;
-    }
-    public function getShapeShifterRate_DASH()
-    {
-        $sql = "SELECT * 
-                FROM `shapeshifter_rates`  
-                WHERE `coin` = 'BTC_DASH'
-                ORDER BY `id` DESC 
-                LIMIT 10
+                LIMIT 5
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
