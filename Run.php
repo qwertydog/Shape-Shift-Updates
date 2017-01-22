@@ -5,6 +5,7 @@
  */
 namespace SSPro;
 use Dotenv\Dotenv;
+use SSPro\Controller\ProcessCoins;
 use SSPro\Controller\ProcessShapeShift;
 
 require 'vendor/autoload.php';
@@ -16,12 +17,8 @@ $dotenv->load();
 /**
  * Updates the ShapeShift_Rates Table
  */
-$shape = new ProcessShapeShift();
-$shape->set_ShapeShifter_Rates();
-
-
-
-
+$shape = new ProcessCoins();
+$shape->processCoinData();
 
 echo "Completed";
 die();
