@@ -3,6 +3,7 @@
 .idea
 vendor
 pma
+/Vagrantfile
 
 
 Thumbs.db

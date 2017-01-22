@@ -23,6 +23,13 @@ php Run.php
 
 # Changelog 
 
+### _Version 0.4_
+Total revamp of the system. Built now as a webapp
+
+- Use MySQL Database
+- Collect data from public API's for various providers
+- All data displayed on front page with table view
+
 ### _Version 0.3_
 - Add SQLite3 database read/write
 - Rewrite service-provider classes to get BTC specific data
