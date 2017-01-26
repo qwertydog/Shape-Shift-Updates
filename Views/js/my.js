@@ -15,32 +15,28 @@ $(document).ready(function () {
 
     $('#showTable_ShapeShifter_ETH').on('click', function () {
         toggleView('#BTC_ShapeShifter_ETH', this);
-        console.log(this);
     });
     $('#showTable_Poloniex_ETH').on('click', function () {
         toggleView('#BTC_Poloniex_ETH', this);
-        console.log(this);
     });
     $('#showTable_ShapeShifter_XMR').on('click', function () {
         toggleView('#BTC_ShapeShifter_XMR', this);
-        console.log(this);
     });
     $('#showTable_Poloniex_XMR').on('click', function () {
         toggleView('#BTC_Poloniex_XMR', this);
-        console.log(this);
     });
     $('#showTable_ShapeShifter_DASH').on('click', function () {
         toggleView('#BTC_ShapeShifter_DASH', this);
-        console.log(this);
     });
     $('#showTable_Poloniex_DASH').on('click', function () {
         toggleView('#BTC_Poloniex_DASH', this);
-        console.log(this);
     });
 
     $('#showTable_Poloniex_PASC').on('click', function () {
         toggleView('#BTC_Poloniex_PASC', this);
-        console.log(this);
+    });
+    $('#showTable_Poloniex_PASC').ready(function () {
+        toggleView('#BTC_Poloniex_PASC', this);
     });
 
 
