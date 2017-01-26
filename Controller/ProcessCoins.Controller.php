@@ -67,17 +67,19 @@ class ProcessCoins extends Base
         $poloniex_btcETH = $this->poloniex->getCoinData('BTC_ETH');
         $poloniex_btcXMR = $this->poloniex->getCoinData('BTC_XMR');
         $poloniex_btcDASH = $this->poloniex->getCoinData('BTC_DASH');
+        $poloniex_btcPASC = $this->poloniex->getCoinData('BTC_PASC');
 
         $ETHbtc = 1 / $poloniex_btcETH['last'];
         $XMRbtc = 1 / $poloniex_btcXMR['last'];
         $DASHbtc = 1 / $poloniex_btcDASH['last'];
+        $PASCbtc = 1 / $poloniex_btcPASC['last'];
 
         $db = new Prices();
         try {
             $db->setPoloniexRate('BTC_ETH', round($poloniex_btcETH['last'],5), round($ETHbtc, 3));
             $db->setPoloniexRate('BTC_XMR', round($poloniex_btcXMR['last'],5), round($XMRbtc,3));
             $db->setPoloniexRate('BTC_DASH', round($poloniex_btcDASH['last'],5), round($DASHbtc,3));
-
+            $db->setPoloniexRate('BTC_PASC', round($poloniex_btcPASC['last'],9), round($PASCbtc,3));
         } catch (\PDOException $exception) {
             // OOps
         }
@@ -91,6 +93,8 @@ class ProcessCoins extends Base
     {
 
         $prices = new Prices();
+        $viewData['Poloniex_PASC'] = $prices->getPoloniexRate('BTC_PASC');
+
         $viewData['ShapeShifter_ETH'] = $prices->getShapeShifterRate('BTC_ETH');
         $viewData['Poloniex_ETH'] = $prices->getPoloniexRate('BTC_ETH');
 

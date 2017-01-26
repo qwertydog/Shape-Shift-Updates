@@ -38,6 +38,11 @@ $(document).ready(function () {
         console.log(this);
     });
 
+    $('#showTable_Poloniex_PASC').on('click', function () {
+        toggleView('#BTC_Poloniex_PASC', this);
+        console.log(this);
+    });
+
 
 });
 
