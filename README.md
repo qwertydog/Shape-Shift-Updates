@@ -1,5 +1,9 @@
-# Bitcoin and Ether Email Updates
-Email alerts for ShapeShift Bitcoin and Ether exchange rate changes
+# Cryptocoin Price Tracking
+As used by Coinwatch.in <br /> 
+Current system provides the ability to log a variety of cryptocoin data in a private database
+
+# Coming Soon
+Shortly the ability to use PHPMailer to email alerts will be completed. 
 
 # Installation
 You must have composer already set up on your environment - [Installing Composer](https://getcomposer.org/doc/00-intro.md)
@@ -9,12 +13,13 @@ composer install
 cp -f .env.example .env
 ```
 
-Now you will need to edit your .env with your GMail SMTP credentials and recieving EMAIL address.
+Now you will need to edit your .env with your Database and Email details
 
-####To use Database services you must first create a SQLite3 database
+####To use Database services you must first create a MySQL database
 
 # Use
-To use, simply call the below from the command line 
+To use, simply call the below from the command line. 
+This will create the data in the database.
 ```
 php Run.php
 ```
@@ -29,6 +34,7 @@ Total revamp of the system. Built now as a webapp
 - Use MySQL Database
 - Collect data from public API's for various providers
 - All data displayed on front page with table view
+- Add routing for page viewing
 
 ### _Version 0.3_
 - Add SQLite3 database read/write
