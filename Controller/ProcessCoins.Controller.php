@@ -34,7 +34,7 @@ class ProcessCoins extends Base
     }
 
     /**
-     * Sets the Poloniex Coin data in the database
+     * Sets the ShapeShifter Coin data in the database
      *  - Converts the BTC->ALT to ALT->BTC
      */
     public function set_ShapeShifter_Rates()
@@ -91,7 +91,6 @@ class ProcessCoins extends Base
      */
     public function get_Shape_Poloniex_Rates()
     {
-
         $prices = new Prices();
         $viewData['Poloniex_PASC'] = $prices->getPoloniexRate('BTC_PASC');
 
