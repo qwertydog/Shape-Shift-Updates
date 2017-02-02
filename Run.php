@@ -17,8 +17,8 @@ $dotenv->load();
 /**
  * Updates the ShapeShift_Rates Table
  */
-$shape = new ProcessCoins();
-$shape->processCoinData();
+$process = new ProcessCoins();
+$process->processCoinData();
 
 echo "Completed";
 die();
